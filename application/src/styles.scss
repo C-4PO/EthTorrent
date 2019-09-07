@@ -5,3 +5,17 @@ html, body {
 
   height: 100%;
 }
+
+@import './assets/photon/css/photon.css';
+
+@font-face {
+  font-family: 'Entypo';
+  src: url('./assets/photon/fonts/photon-entypo.woff');
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 0 30px rgba(0,0,0,.1);
+}
