@@ -16,9 +16,8 @@
               app-list-item-torrent
               [download]="download"
               *ngFor="let download of downloads"
-              
+              (onFinish)="finishTorrent($event,download)"
             ></li>
-            <!--(onFinish)="finishTorrent(event,download)"-->
           </ul>
       </div>
       <div class="pane">
@@ -39,7 +38,7 @@
           <form>
             <div class="form-group">
               <label>Magnet URI</label>
-              <input type="text" class="form-control" placeholder="URI" [formControl]="magnet">
+              <input type="text" class="form-control" placeholder="URI" [formControl]="magnet" (enter)="submitMagnet()">
             </div>
             <div class="form-actions">
               <button type="submit" class="btn btn-form btn-default" (click)="clearMagnet()">Clear</button>

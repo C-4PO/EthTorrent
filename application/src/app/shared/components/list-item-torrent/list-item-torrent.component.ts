@@ -18,7 +18,8 @@ export class ListItemTorrentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    this.trackTorrent();
+    console.log('num peers', this.download.numPeers, this.download.maxWebConns);
   }
 
   get barWidth() {
@@ -29,10 +30,18 @@ export class ListItemTorrentComponent implements OnInit {
   }
 
   trackTorrent() {
+    console.log(this.download.wires);
+
+    this.download.on('wire', function (wire) {
+      console.log(wire);
+    });
+
     this.download.on('done',() => {
       if (!this.isFailed) {
         this.emitTorrentFinished(true);
         this.isSucceded = true;
+        console.log('num peers', this.download.numPeers, this.download.wires);
+
       }
     });
     this.download.on('error', () => {

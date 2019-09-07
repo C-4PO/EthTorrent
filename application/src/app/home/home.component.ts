@@ -32,4 +32,10 @@ export class HomeComponent implements OnInit {
     this.magnet.setValue('');
   }
 
+  finishTorrent(isSuccess: boolean ,torrent: Torrent) {
+    if (isSuccess) {
+      this.torrentService.serializeTorrent(torrent);
+    }
+  }
+
 }

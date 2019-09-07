@@ -15,13 +15,21 @@ export class TorrentService {
 
   constructor() {
     this.client = new WebTorrent();
+    console.log("heyey", this.client);
   }
 
   add(torrentId: String) {
+    
     this.client.add(torrentId,  (torrent: Torrent) => this._addDownload(torrent) );
   }
 
+  serializeTorrent(torrent: Torrent) {
+    const buffers: Array<Buffer> = [];
+    // torrent.files.for
+  }
+
   private _addDownload(download) {
+    console.log(download);
     this.downloadSubject.next(download);
   }
 }
