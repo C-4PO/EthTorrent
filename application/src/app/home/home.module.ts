@@ -6,9 +6,10 @@ import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
 
 import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
+import { ListItemTorrentComponent } from '../shared/components/list-item-torrent/list-item-torrent.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, ListItemTorrentComponent],
   imports: [CommonModule, SharedModule, HomeRoutingModule, FormsModule, ReactiveFormsModule],
 })
 export class HomeModule {}

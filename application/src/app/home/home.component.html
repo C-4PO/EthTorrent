@@ -12,13 +12,7 @@
             <li class="list-group-header">
               <input class="form-control" type="text" placeholder="Search for someone">
             </li>
-            <li class="list-group-item" *ngFor="let download of downloads" >
-                <div class="img-circle media-object pull-left" style="background-color: red; height: 32px; width: 32px;"></div>
-              <div class="media-body">
-                <strong>{{download.name}}</strong>
-                <p>{{download.progress}}</p>
-              </div>
-            </li>
+            <li app-list-item-torrent [download]="download" *ngFor="let download of downloads"></li>
           </ul>
       </div>
       <div class="pane">

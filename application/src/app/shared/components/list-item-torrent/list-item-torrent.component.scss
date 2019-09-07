@@ -1,0 +1,25 @@
+:host {
+    position: relative;
+    height: 100%;
+    height: 60px;
+    background-color: #EEEEEE;
+}
+
+.progress-background {
+    z-index: 1;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    background-color: greenyellow;
+}
+.torrent-info {
+    padding: 15px;
+    z-index: 2;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
