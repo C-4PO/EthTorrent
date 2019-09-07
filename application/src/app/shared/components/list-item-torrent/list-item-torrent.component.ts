@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Torrent } from 'webtorrent';
 
 @Component({
@@ -9,7 +9,11 @@ import { Torrent } from 'webtorrent';
 })
 export class ListItemTorrentComponent implements OnInit {
   @Input() download: any;
+  @Output() onFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('trackingInfo', {static: false}) box;
+
+  isFailed: boolean = false;
+  isSucceded: boolean = true;
 
   constructor() { }
 
@@ -23,5 +27,25 @@ export class ListItemTorrentComponent implements OnInit {
     }
     return 0;
   }
+
+  trackTorrent() {
+    this.download.on('done',() => {
+      if (!this.isFailed) {
+        this.emitTorrentFinished(true);
+        this.isSucceded = true;
+      }
+    });
+    this.download.on('error', () => {
+      if (!this.isSucceded) {
+        this.emitTorrentFinished(false);
+        this.isFailed = true;
+      }
+    });
+  }
+
+  emitTorrentFinished(isFailed) {
+    this.onFinish.emit(isFailed);
+  }
+
 
 }

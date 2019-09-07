@@ -2,7 +2,8 @@
     position: relative;
     height: 100%;
     height: 60px;
-    background-color: #EEEEEE;
+    background-color: #FAFAFA;
+    border-bottom: 1px solid #BDBDBD;
 }
 
 .progress-background {
@@ -12,14 +13,27 @@
     bottom: 0;
     left: 0;
     width: 30px;
-    background-color: greenyellow;
+    background-color: #2ecc71;
 }
 .torrent-info {
+    display: flex;
     padding: 15px;
+    align-items: center;
     z-index: 2;
     position: absolute;
     top:0;
     bottom: 0;
     left: 0;
     right: 0;
+
+    h4 {
+        display: inline;
+        color: #2c3e50;
+    }
+    .icon {
+        font-size: 25px;
+        display: inline-block;
+        margin-right: 10px; 
+        color: #FAFAFA;
+    }
 }
