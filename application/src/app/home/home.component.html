@@ -4,36 +4,6 @@
     <div class="card card--toolbar-global-info"></div>
     <div class="card card--toolbar-global-info"></div>
     <div class="card card--toolbar-global-info"></div>
-    <!--
-    <div class="toolbar-actions">
-      <div class="btn-group">
-        <button class="btn btn-default">
-          <span class="icon icon-home"></span>
-        </button>
-        <button class="btn btn-default">
-          <span class="icon icon-folder"></span>
-        </button>
-        <button class="btn btn-default active">
-          <span class="icon icon-cloud"></span>
-        </button>
-        <button class="btn btn-default">
-          <span class="icon icon-popup"></span>
-        </button>
-        <button class="btn btn-default">
-          <span class="icon icon-shuffle"></span>
-        </button>
-      </div>
-  
-      <button class="btn btn-default">
-        <span class="icon icon-home icon-text"></span>
-        Filters
-      </button>
-  
-      <button class="btn btn-default btn-dropdown pull-right">
-        <span class="icon icon-megaphone"></span>
-      </button>
-    </div>
-    -->
   </header>
   <div class="window-content">
     <div class="pane-group">
@@ -42,11 +12,11 @@
             <li class="list-group-header">
               <input class="form-control" type="text" placeholder="Search for someone">
             </li>
-            <li class="list-group-item" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" >
+            <li class="list-group-item" *ngFor="let download of downloads" >
                 <div class="img-circle media-object pull-left" style="background-color: red; height: 32px; width: 32px;"></div>
               <div class="media-body">
                 <strong>List item title</strong>
-                <p>Lorem ipsum dolor sit amet.</p>
+                <p>{{download}}</p>
               </div>
             </li>
           </ul>
@@ -56,7 +26,7 @@
             <li class="list-group-header">
               <input class="form-control" type="text" placeholder="Search for someone">
             </li>
-            <li class="list-group-item" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" >
+            <li class="list-group-item"  >
               <div class="img-circle media-object pull-left" style="background-color: red; height: 32px; width: 32px;"></div>
               <div class="media-body">
                 <strong>List item title</strong>
@@ -65,7 +35,18 @@
             </li>
           </ul>
       </div>
-      <div class="pane">Hey Hey Hey</div>
+      <div class="pane">
+          <form>
+            <div class="form-group">
+              <label>Magnet URI</label>
+              <input type="text" class="form-control" placeholder="URI" [formControl]="magnet">
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-form btn-default" (click)="clearMagnet()">Clear</button>
+              <button type="submit" class="btn btn-form btn-primary" (click)="submitMagnet()">Submit</button>
+            </div>
+          </form>
+      </div>
     </div>
   </div>
   <footer class="toolbar toolbar-footer">

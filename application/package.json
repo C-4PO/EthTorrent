@@ -83,5 +83,9 @@
   },
   "engines": {
     "node": ">=10.9.0"
+  },
+  "dependencies": {
+    "@types/webtorrent": "^0.107.0",
+    "webtorrent": "^0.107.9"
   }
 }

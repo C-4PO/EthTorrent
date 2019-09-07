@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -29,6 +30,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     CoreModule,
     SharedModule,
     HomeModule,
