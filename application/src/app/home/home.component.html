@@ -37,6 +37,7 @@
       <div class="pane pane--public">
           <form>
             <div class="form-group">
+              <button type="login" class="btn btn-form btn-default" (click)="createWallet()">Create Wallet</button>
               <label>Magnet URI</label>
               <input type="text" class="form-control" placeholder="URI" [formControl]="magnet" (enter)="submitMagnet()">
             </div>
