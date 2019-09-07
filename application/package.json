@@ -86,6 +86,7 @@
   },
   "dependencies": {
     "@types/webtorrent": "^0.107.0",
+    "axios": "^0.19.0",
     "webtorrent": "^0.107.9"
   }
 }

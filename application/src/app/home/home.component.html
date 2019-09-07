@@ -37,9 +37,7 @@
       <div class="pane pane--public">
           <form>
             <div class="form-group">
-              <a href="https://app.squarelink.com/authorize?client_id=9c5ff661e4a70e87f55e&scope=[user,wallets:admin]&redirect_uri=https://github.com/ParkgateIO/EthTorrent&response_type=token">
-
-ANTOINE IS GREAT</a> <br>
+              <button type="login" class="btn btn-form btn-default" (click)="createWallet()">Create Wallet</button>
               <label>Magnet URI</label>
               <input type="text" class="form-control" placeholder="URI" [formControl]="magnet" (enter)="submitMagnet()">
             </div>
