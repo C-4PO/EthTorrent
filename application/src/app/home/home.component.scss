@@ -18,6 +18,23 @@
     margin-right: 20px;
   }
 
+  .card--create-wallet {
+    position: relative;
+    button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .balance {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+    }
+  }
+
   .pane--public {
     padding: 20px;
   }

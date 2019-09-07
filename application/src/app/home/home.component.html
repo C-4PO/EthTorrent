@@ -1,6 +1,11 @@
 <div class="home-route window">
   <header class="toolbar toolbar-header toolbar-global-info">
-    <div class="card card--toolbar-global-info"></div>
+    <div class="card card--toolbar-global-info card--create-wallet">
+        <button *ngIf="balance == null" type="login" class="btn btn-form btn-default" (click)="createWallet()">Create Wallet</button>
+        <div *ngIf="balance != null" class="balance">
+          {{balance}} Eth
+        </div>
+    </div>
     <div class="card card--toolbar-global-info"></div>
     <div class="card card--toolbar-global-info"></div>
     <div class="card card--toolbar-global-info"></div>
@@ -17,6 +22,7 @@
               [download]="download"
               *ngFor="let download of downloads"
               (onFinish)="finishTorrent($event,download)"
+              [isUpload]="false"
             ></li>
           </ul>
       </div>
@@ -25,19 +31,17 @@
             <li class="list-group-header">
               <input class="form-control" type="text" placeholder="Search for someone">
             </li>
-            <li class="list-group-item"  >
-              <div class="img-circle media-object pull-left" style="background-color: red; height: 32px; width: 32px;"></div>
-              <div class="media-body">
-                <strong>List item title</strong>
-                <p>Lorem ipsum dolor sit amet.</p>
-              </div>
-            </li>
+            <li
+              app-list-item-torrent
+              [download]="upload"
+              *ngFor="let upload of uploads"
+              [isUpload]="true"
+            ></li>
           </ul>
       </div>
       <div class="pane pane--public">
           <form>
             <div class="form-group">
-              <button type="login" class="btn btn-form btn-default" (click)="createWallet()">Create Wallet</button>
               <label>Magnet URI</label>
               <input type="text" class="form-control" placeholder="URI" [formControl]="magnet" (enter)="submitMagnet()">
             </div>

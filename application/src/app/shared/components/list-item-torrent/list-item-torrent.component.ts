@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { Torrent } from 'webtorrent';
 
 @Component({
   selector: '[app-list-item-torrent]',
@@ -9,62 +8,49 @@ import { Torrent } from 'webtorrent';
 })
 export class ListItemTorrentComponent implements OnInit {
   @Input() download: any;
-  @Output() onFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() isUpload: boolean;
+  @Output() onFinish: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('trackingInfo', {static: false}) box;
 
   isFailed: boolean = false;
   isSucceded: boolean = true;
+  peerIds: Array<String> = [];
 
   constructor() { }
 
   ngOnInit() {
     this.trackTorrent();
-    console.log('num peers', this.download.numPeers, this.download.maxWebConns);
   }
 
   get barWidth() {
-    if (this.box) {
-      return this.download.progress * this.box.nativeElement.offsetWidth;
+    if (this.isUpload) {
+      return `100%`;
     }
-    return 0;
+    if (this.box) {
+      return `${this.download.progress * this.box.nativeElement.offsetWidth}px`;
+    }
+    return "0px";
   }
 
   trackTorrent() {
-    console.log(this.download.wires);
-
-    this.download.on('wire', function (wire) {
-
-      let ids:string[]
-      if(JSON.parse(localStorage.getItem("ids"))==null){
-        ids = Array()
-      } else {
-        ids = JSON.parse(localStorage.getItem("ids"));
-      }
-
-      ids.push(wire.peerId);
-
-      localStorage.setItem("ids",JSON.stringify(ids))
-    });
-
-    this.download.on('done',() => {
-      if (!this.isFailed) {
-        this.emitTorrentFinished(true);
-        this.isSucceded = true;
-        console.log('num peers', this.download.numPeers, this.download.wires);
-
-      }
-    });
-    this.download.on('error', () => {
-      if (!this.isSucceded) {
-        this.emitTorrentFinished(false);
-        this.isFailed = true;
-      }
-    });
+    if (!this.isUpload) {  
+      this.download.on('done',() => {
+        if (!this.isFailed) {
+          this.emitTorrentFinished(true);
+          this.isSucceded = true;
+        }
+      });
+      this.download.on('error', () => {
+        if (!this.isSucceded) {
+          this.emitTorrentFinished(false);
+          this.isFailed = true;
+        }
+      });
+    }
   }
 
-  emitTorrentFinished(isFailed) {
-    this.onFinish.emit(isFailed);
+  emitTorrentFinished(isSuccess: boolean) {
+    this.onFinish.emit({isSuccess, peerIds: this.download.wires.map((wire) => wire.peerId)});
   }
-
 
 }
