@@ -33,7 +33,17 @@ export class ListItemTorrentComponent implements OnInit {
     console.log(this.download.wires);
 
     this.download.on('wire', function (wire) {
-      console.log(wire);
+
+      let ids:string[]
+      if(JSON.parse(localStorage.getItem("ids"))==null){
+        ids = Array()
+      } else {
+        ids = JSON.parse(localStorage.getItem("ids"));
+      }
+
+      ids.push(wire.peerId);
+
+      localStorage.setItem("ids",JSON.stringify(ids))
     });
 
     this.download.on('done',() => {
