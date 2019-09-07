@@ -15,8 +15,8 @@
             <li class="list-group-item" *ngFor="let download of downloads" >
                 <div class="img-circle media-object pull-left" style="background-color: red; height: 32px; width: 32px;"></div>
               <div class="media-body">
-                <strong>List item title</strong>
-                <p>{{download}}</p>
+                <strong>{{download.name}}</strong>
+                <p>{{download.progress}}</p>
               </div>
             </li>
           </ul>
@@ -35,7 +35,7 @@
             </li>
           </ul>
       </div>
-      <div class="pane">
+      <div class="pane pane--public">
           <form>
             <div class="form-group">
               <label>Magnet URI</label>
