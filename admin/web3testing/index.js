@@ -18,8 +18,6 @@ Contract.fund(0, { from: address, value: '10000000000000' })
 function withdraw() {
   web3.eth.getAccounts(function(err, accounts) { console.log(accounts); address = accounts.toString();
 
-
-
   Contract.withdraw({from: address})
    .then(function (txHash) {
    console.log('Transaction sent')
