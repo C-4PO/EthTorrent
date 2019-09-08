@@ -18,6 +18,18 @@
 
 .uploaded {
     background-color: #3498db;
+    border-bottom: 1px solid white;
+}
+
+.complication {
+    display: inline-flex;
+    margin: 0 5px;
+    font-weight: bold;
+    justify-self: end;
+    .icon {
+        display: inline-block;
+        margin-right: 3px;
+    }
 }
 .torrent-info {
     display: flex;
@@ -30,11 +42,12 @@
     left: 0;
     right: 0;
 
-    h4 {
-        display: inline;
+    &__title{
+        display: inline-flex;
         color: #2c3e50;
+        margin-right: 15px;
     }
-    .icon {
+    .icon-lead {
         font-size: 25px;
         display: inline-block;
         margin-right: 10px; 

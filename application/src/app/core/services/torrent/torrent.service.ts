@@ -43,7 +43,6 @@ export class TorrentService {
 
   addToUploads(torrent: Torrent) {
     this.uploadsSubject.next(torrent);
-    // torrent.files.for
   }
 
   private _addDownload(download) {

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 
+const MEGA_BYTE = 1000000;
+
 @Component({
   selector: '[app-list-item-torrent]',
   templateUrl: './list-item-torrent.component.html',
@@ -30,6 +32,14 @@ export class ListItemTorrentComponent implements OnInit {
       return `${this.download.progress * this.box.nativeElement.offsetWidth}px`;
     }
     return "0px";
+  }
+
+  get downloadMegabytes() {
+    return (this.download.downloadSpeed / MEGA_BYTE).toFixed(2);
+  }
+
+  get uploadMegabytes() {
+    return (this.download.uploadSpeed / MEGA_BYTE).toFixed(2);
   }
 
   trackTorrent() {

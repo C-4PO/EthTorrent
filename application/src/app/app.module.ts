@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -34,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     CoreModule,
     SharedModule,
+    AngularSvgIconModule,
     HomeModule,
     AppRoutingModule,
     TranslateModule.forRoot({

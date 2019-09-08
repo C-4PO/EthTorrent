@@ -1,5 +1,9 @@
 <div class="progress-background" [ngStyle]="{width: barWidth}" [ngClass]="{uploaded: isUpload}" ></div>
 <div class="torrent-info" #trackingInfo>
-    <span class="icon icon-doc-text"></span> <h4>{{download.name}}</h4>
+    <span *ngIf="!isUpload" class="icon icon-lead icon-doc-text"></span>
+    <span *ngIf="isUpload"class="icon icon-lead icon-check"></span>
+    <h4 class="torrent-info__title">{{download.name}}</h4>
+    <span *ngIf="!isUpload" class="complication"><span class="icon icon-down"></span>{{downloadMegabytes}} mb/s</span>
+    <span class="complication"><span class="icon icon-up"></span>{{uploadMegabytes}} mb/s</span>
+    <span class="complication">{{download.ratio}} ratio</span>
 </div>
-

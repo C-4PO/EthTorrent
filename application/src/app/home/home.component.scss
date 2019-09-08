@@ -2,13 +2,29 @@
   height: 100%;
   width: 100%;
 
-  $total-cards: 3;
+  @mixin center() {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   .toolbar-global-info {
     display: flex;
     height: 20%;
     min-height: 150px;
     padding: 20px 0 20px 20px;
+  }
+
+  .pane {
+    position: relative;
+  }
+
+  .list-group-header--title {
+    box-shadow: inset 0 1px 0 #f5f4f5;
+    background-color: #e8e6e8;
+    background-image: linear-gradient(to bottom, #e8e6e8 0%, #d1cfd1 100%);
+    text-align: center;
   }
 
   .card--toolbar-global-info {
@@ -18,24 +34,58 @@
     margin-right: 20px;
   }
 
-  .card--create-wallet {
+  .logo-icon {
+    display: block;
+  }
+
+  .card {
     position: relative;
-    button {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    .balance {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 50px;
+  }
+
+  .card__center-content {
+    text-align: center;
+    @include center();
+  }
+
+  .btn-create {
+    margin-top: 5px;
+    display: block;
+  }
+
+  .empty-state {
+    @include center();
+    color: #e6e5e6;
+    text-align: center;
+    .icon {
+      font-size: 100px;
     }
   }
 
-  .pane--public {
-    padding: 20px;
+  .upload-form {
+    min-width: 200px;
+  }
+
+  .card--create-wallet {
+    svg {
+      display: inline;
+    }
+    .balance {
+      font-size: 50px;
+      line-height: 1.1;
+      .currency {
+        font-size: 20px
+      }
+    }
+    .address {
+      max-width: 200px;
+      color: grey;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
   }
 }

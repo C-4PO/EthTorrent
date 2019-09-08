@@ -42,12 +42,14 @@ export class WalletService {
       localStorage.setItem('address', self.address.toString());
       localStorage.setItem('balance', res.data.ETH.balance.toString());
       window.opener.postMessage({
+        isWallet: true,
         token: self.token,
         address: self.address,
         balance: res.data.ETH.balance,
       }, '*');
     }).catch((error) => {
       window.opener.postMessage({
+        isWallet: true,
         token: null,
         address: null,
         balance: null,
