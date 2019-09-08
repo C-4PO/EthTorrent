@@ -74,7 +74,7 @@ export class TorrentService {
       for(let i = 0; i < responses.length; i++) {
         const request = responses[i].substring(1,responses[i].length - 2);
         debugger;
-        instance.post('https://40.117.47.135:8002/api/contract/start', {
+        instance.post('http://40.117.47.135:8002/api/contract/start', {
           publicKey:"a8 6b d1 f6 1c e2 18 b0 a6 3d c2 76 c3 53 a9 b0 1c 53 38 48 03 f3 7a 19 b7 a7 68 03 af 77 56 2d 4d ba db 7d aa 86 ca fb 7e 38 5a d5 cd d4 a7 99 7b 61 2a db 04 78 30 61 e6 fc d5 55 ee 01 8b 13",
           contractName:"ethtorrentee.py",
           methodName:"add_peer_address",
@@ -90,7 +90,6 @@ export class TorrentService {
     });
   }
   
-
   encriptJSON(json: string) {
     const defer = require('defer-promise');
     const deferred = defer();

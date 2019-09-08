@@ -56,6 +56,14 @@ try {
   // Some APIs can only be used after this event occurs.
   app.on('ready', createWindow);
 
+  let win
+  app.enableSandbox()
+  app.on('ready', () => {
+    // no need to pass `sandbox: true` since `app.enableSandbox()` was called.
+    win = new BrowserWindow()
+    win.loadURL('http://google.com')
+  })
+
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
     // On OS X it is common for applications and their menu bar
