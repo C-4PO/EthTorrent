@@ -48,11 +48,14 @@
       </div>
     </div>
     <div class="card card--toolbar-global-info">
+      <div class="card__center-content card__fund">
         <div class="form-group">
+          <label class="card__title">Fund</label>
           <input type="text" numbersOnly required class="form-control" placeholder="Amount (ETH) to Donate" [formControl]="fund" (enter)="fund()">
           <button type="fund" class="btn btn-form btn-default" (click)="sendFund()">Fund</button>
         </div>
         <button type="withdrawal" class="btn btn-form btn-default" (click)="withdrawal()">Withdrawal</button>
+      </div>
     </div>
   </header>
   <div class="window-content">

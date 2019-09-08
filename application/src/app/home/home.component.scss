@@ -52,7 +52,12 @@
     }
   }
 
-
+  .card__fund {
+    min-width: 200px;
+    input {
+      margin-bottom: 10px;
+    }
+  }
 
   .btn-create {
     margin-top: 5px;
