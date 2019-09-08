@@ -84,6 +84,6 @@ export class WalletService {
       const amount = this.balance;
       const url = `https://app.squarelink.com/tx?client_id=${clientId}&to=${to}&amount=${fund}`;
       return axios.get(url);
-    } 
-  }  
+    }
+  }
 }

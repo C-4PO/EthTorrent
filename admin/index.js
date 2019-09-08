@@ -242,7 +242,7 @@ async function initialize(provider){
   Contract = new ethers.Contract(ContractAddress,ABI,signer)
 
   await getBalance()
-
+	
   await getWithdrawable()
 }
 

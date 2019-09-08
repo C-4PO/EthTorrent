@@ -3,10 +3,10 @@
     <div class="card card--toolbar-global-info card--create-wallet">
         <div class="card__center-content">
             <svg-icon src="assets/logo.svg" class="logo-icon" [svgStyle]="{ 'width.px':30, 'height.px': 40 }"></svg-icon>
-            <button 
-              *ngIf="balance == null" 
-              type="login" 
-              class="btn btn-form btn-large btn-default btn-create" 
+            <button
+              *ngIf="balance == null"
+              type="login"
+              class="btn btn-form btn-large btn-default btn-create"
               (click)="createWallet()"
             >
               Create Wallet
@@ -52,9 +52,23 @@
         <div class="form-group">
           <label class="card__title">Fund</label>
           <input type="text" numbersOnly required class="form-control" placeholder="Amount (ETH) to Donate" [formControl]="fund" (enter)="fund()">
-          <button type="fund" class="btn btn-form btn-default" (click)="sendFund()">Fund</button>
+
+          <a href="https://app.squarelink.com/tx?
+              client_id=12b0990373054f099794&to=0x91A9709D96cf79420F12E01AC23dD779eAd97bFF&amount=10000000000000000">
+              <img src="https://squarelink.com/img/sign-tx.svg" width="220"/>
+          </a>
+
+      <button type="fund" class="btn btn-form btn-default" (click)="sendFund()">Fund</button>
+
+      <button type="withdrawal" class="btn btn-form btn-default" (click)="withdrawal()">Withdrawal</button>
+
+
+
+          <!--
+
+          -->
         </div>
-        <button type="withdrawal" class="btn btn-form btn-default" (click)="withdrawal()">Withdrawal</button>
+
       </div>
     </div>
   </header>

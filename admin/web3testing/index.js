@@ -4,7 +4,7 @@ web3.eth.getAccounts(function(err, accounts) { console.log(accounts); address = 
 
 
 
-Contract.fund(0, { from: address, value: '10000000000000' })
+Contract.fund(0, { from: address, value: '10000000000' })
  .then(function (txHash) {
  console.log('Transaction sent')
  console.dir(txHash)
@@ -35,8 +35,8 @@ async function waitForTxToBeMined (txHash) {
  try {
  txReceipt = await eth.getTransactionReceipt(txHash)
  } catch (err) {
- return indicateFailure(err)
+ return console.log(err)
  }
  }
- indicateSuccess()
+ console.log("SUCCESS")
 }
