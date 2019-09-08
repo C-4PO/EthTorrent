@@ -16,6 +16,7 @@
     background-color: #2ecc71;
 }
 
+
 .uploaded {
     background-color: #3498db;
     border-bottom: 1px solid white;
@@ -31,6 +32,12 @@
         margin-right: 3px;
     }
 }
+
+.form-file {
+    display: block;
+    margin: 0 auto;
+}
+
 .torrent-info {
     display: flex;
     padding: 15px;

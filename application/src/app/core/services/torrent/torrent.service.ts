@@ -4,6 +4,7 @@ import { Torrent } from 'webtorrent';
 import { Subject } from 'rxjs';
 import Crypto from 'crypo';
 import axios from 'axios';
+import * as fs from 'fs';
 
 const testAddresses = [
   "0xCf56FdF19754164Dd213C6A21727800b38b03Ee4",
@@ -42,7 +43,15 @@ export class TorrentService {
   }
 
   addToUploads(torrent: Torrent) {
+    console.log(torrent);
     this.uploadsSubject.next(torrent);
+  }
+
+  uploadFile(file) {
+    this.client.seed(file, {name: file.name}, (torrent: Torrent) => {
+      alert(`New Magnet URI: ${torrent.magnetURI}`);
+      this.addToUploads(torrent)
+    });
   }
 
   private _addDownload(download) {

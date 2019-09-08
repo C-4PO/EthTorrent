@@ -19,12 +19,25 @@
             </div>
         </div>
     </div>
-    <div class="card card--toolbar-global-info"></div>
     <div class="card card--toolbar-global-info card--public">
       <div class="card__center-content">
         <form class="upload-form">
           <div class="form-group">
-            <label>Magnet URI</label>
+            <label class="card__title">Upload</label>
+            <input type="file" class="form-file" placeholder="Upload file" #file (enter)="submitFile()">
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-form btn-default" (click)="clearFile()">Clear</button>
+            <button type="submit" class="btn btn-form btn-primary" (click)="submitFile()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card card--toolbar-global-info card--public">
+      <div class="card__center-content">
+        <form class="upload-form">
+          <div class="form-group">
+            <label class="card__title">Download</label>
             <input type="text" class="form-control" placeholder="URI" [formControl]="magnet" (enter)="submitMagnet()">
           </div>
           <div class="form-actions">

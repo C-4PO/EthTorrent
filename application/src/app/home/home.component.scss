@@ -40,12 +40,19 @@
 
   .card {
     position: relative;
+
+    &__title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    &__center-content {
+      text-align: center;
+      @include center();
+    }
   }
 
-  .card__center-content {
-    text-align: center;
-    @include center();
-  }
+
 
   .btn-create {
     margin-top: 5px;

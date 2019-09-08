@@ -5,5 +5,6 @@
     <h4 class="torrent-info__title">{{download.name}}</h4>
     <span *ngIf="!isUpload" class="complication"><span class="icon icon-down"></span>{{downloadMegabytes}} mb/s</span>
     <span class="complication"><span class="icon icon-up"></span>{{uploadMegabytes}} mb/s</span>
-    <span class="complication">{{download.ratio}} ratio</span>
+    <span class="complication">{{ratio}} ratio</span>
+    <span *ngIf="download.numPeers > 0" class="complication">{{download.numPeers}} peer(s)</span>
 </div>
