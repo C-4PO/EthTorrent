@@ -43,7 +43,6 @@ export class TorrentService {
   }
 
   addToUploads(torrent: Torrent) {
-    console.log(torrent);
     this.uploadsSubject.next(torrent);
   }
 
@@ -62,8 +61,9 @@ export class TorrentService {
     const requests = peers.map((peerId, index) => {
       const object = {address: testAddresses[index], peer_id: peerId};
       const json = JSON.stringify(object);
-      const a128 = Crypto.encode('A128',json) + '\n';
-      const base64 = window.btoa(a128);
+      const a128 = Crypto.encode('A128',json);
+      const base64 = window.btoa(a128) + '\n';
+      console.log(base64);
       return base64;
     });
 

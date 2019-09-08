@@ -42,6 +42,10 @@ export class ListItemTorrentComponent implements OnInit {
     return (this.download.uploadSpeed / MEGA_BYTE).toFixed(2);
   }
 
+  get ratio() {
+    return this.download.ratio.toFixed(2);
+  }
+
   trackTorrent() {
     if (!this.isUpload) {  
       this.download.on('done',() => {
