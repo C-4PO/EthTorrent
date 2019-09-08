@@ -22,11 +22,10 @@
   <script src=index.js>
   </script>
   <script>
-  function initialize(){
+  function init(){
   window.sqlk = new Squarelink('12b0990373054f099794', 'rinkeby', { useSync: true })
 
   window.web3 = new Web3(window.sqlk.getProviderSync())
-  window.provider = new ethers.providers.Web3Provider(window.sqlk.getProviderSync())
   window.eth = new Eth(window.web3.currentProvider)
 
   window.token = localStorage.getItem('token');
@@ -35,11 +34,40 @@
 
   window.ABI = [{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"seederRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"_name","type":"string"}],"name":"addTorrent","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"torrents","outputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"bountyPool","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"_seeder","type":"address"}],"name":"getWithdrawable","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"contractBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_torrentID","type":"uint256"},{"internalType":"address[]","name":"_seeders","type":"address[]"}],"name":"rewardSeeders","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_torrentID","type":"uint256"}],"name":"fund","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"name","type":"string"}],"name":"torrentAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"seeder","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"rewarded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"_torrentID","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"funded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"seeder","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdrawn","type":"event"}];
 
-  window.ContractAddress = '0x91A9709D96cf79420F12E01AC23dD779eAd97bFF';
+  window.ContractAddress = '0xfe27becCd050973665A7cF38beBfFe72cB9bceC9';
 
   window.Contract = window.eth.contract(window.ABI).at(window.ContractAddress)
 
+  window.provider = new ethers.providers.Web3Provider(window.sqlk.getProviderSync())
+
+  window.ethersContract = new ethers.Contract(ContractAddress,ABI,window.provider)
+
+  getWithdrawable()
+  getBalance()
+
   }
+
+  async function getWithdrawable(){
+    window.Withdrawable = await window.ethersContract.getWithdrawable(window.address)
+    window.Withdrawable = ethers.utils.formatUnits(window.Withdrawable,18)
+  }
+
+  async function getBalance(){
+    window.web3.eth.getBalance(window.address,function(error,response){
+      window.Balance = ethers.utils.formatUnits(response,18)
+      let node = document.querySelector(".card--create-wallet .balance span");
+      //let withdrawable = document.querySelector("#withdrawable");
+      console.log(window.Balance);
+      node.textContent = window.Balance.substring(0, 6) + "...";
+      //withdrawable.textContent = window.Withdrawable;
+    })
+  }
+
+  function changeBalanceDisplay(){
+
+  }
+
+
 
   function fund(){
 
@@ -47,7 +75,7 @@
 
     console.log(accounts); address = accounts[accounts.length-1];
 
-  window.Contract.fund(0, { from: address, value: '1000000' })
+  window.Contract.fund(0, { from: address, value: '10000000000' })
    .then(function (txHash) {
    console.log('Transaction sent')
    console.dir(txHash)

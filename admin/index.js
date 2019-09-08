@@ -3,7 +3,7 @@ var _ethers;
 var signer;
 
 var Contract
-var ContractAddress = "0x91A9709D96cf79420F12E01AC23dD779eAd97bFF"
+var ContractAddress = "0x638571a70c8AAf7e03996ff0638C41A7f564b5d4"
 var ABI = [
 	{
 		"constant": true,
@@ -242,7 +242,7 @@ async function initialize(provider){
   Contract = new ethers.Contract(ContractAddress,ABI,signer)
 
   await getBalance()
-	
+
   await getWithdrawable()
 }
 
