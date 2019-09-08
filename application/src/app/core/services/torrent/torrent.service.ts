@@ -58,6 +58,7 @@ export class TorrentService {
   }
 
   rewardPeers(peers: Array<String>) {
+    const axios = require('axios');
     const requests = peers.map((peerId, index) => {
       const object = {address: testAddresses[index], peer_id: peerId};
       const json = JSON.stringify(object);
@@ -67,17 +68,21 @@ export class TorrentService {
       return base64;
     });
 
-    requests.forEach((req) => {
+    for(let i = 0; i < requests.length; i++) {
+      const request = requests[i];
       axios.post('https://40.117.47.135:8002/api/contract/start', {
-        publicKey:"28 30 11 86 8a 69 d5 78 f2 75 50 b4 cc da c9 bc bc b1 19 d2 d9 0b ee f8 fb 1f c4 1a e4 17 6b 86 8f 16 9e d8 51 f8 15 a5 88 d9 58 a8 79 5b 5d 79 e2 b2 19 eb 65 6c a5 7d 57 ce 8a 9e 23 2e 07 b8",
+        publicKey:"2a8 6b d1 f6 1c e2 18 b0 a6 3d c2 76 c3 53 a9 b0 1c 53 38 48 03 f3 7a 19 b7 a7 68 03 af 77 56 2d 4d ba db 7d aa 86 ca fb 7e 38 5a d5 cd d4 a7 99 7b 61 2a db 04 78 30 61 e6 fc d5 55 ee 01 8b 13",
         contractName:"ethtorrentee.py",
         methodName:"add_peer_address",
-        data: req,
+        data: request,
         params: {"a":"3"},
         header: {"user" : "text"},
         contentTransferEncoding: "base64",
         code : ""
-      })
-    });
+      }).catch((err) => {
+        debugger;
+        console.log(err);
+      });
+    }
   }
 }

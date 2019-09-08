@@ -85,6 +85,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  copyAddress() {
+    navigator.clipboard.writeText(this.address.toString());
+  }
+
   withdrawal() {
     this.walletService.withdrawal();
   }
