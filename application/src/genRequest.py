@@ -27,7 +27,7 @@ def get_json_data_item_key(mode, data, aesKeyFile):
 
 def main():
     data = sys.argv[1]
-    aesKeyFile = './hack.aes'
+    aesKeyFile = 'src/hack.aes'
     print(get_json_data_item_key(1, data, aesKeyFile))
 
 if __name__ == '__main__':

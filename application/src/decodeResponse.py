@@ -27,7 +27,7 @@ def get_response(data, aesKeyFile):
 
 def main():
     responseData = sys.argv[1]
-    aesKeyFile = './hack.aes'
+    aesKeyFile = 'src/hack.aes'
     print(get_response(responseData, aesKeyFile))
 
 

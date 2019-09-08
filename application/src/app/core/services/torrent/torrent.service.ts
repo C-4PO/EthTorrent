@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import * as WebTorrent from 'webtorrent/webtorrent.min.js';
 import { Torrent } from 'webtorrent';
 import { Subject } from 'rxjs';
-import Crypto from 'crypo';
+import { spawn } from 'child_process';
+import { Agent } from 'https'
 import axios from 'axios';
-import * as fs from 'fs';
 
 const testAddresses = [
   "0xCf56FdF19754164Dd213C6A21727800b38b03Ee4",
@@ -57,32 +57,72 @@ export class TorrentService {
     this.downloadSubject.next(download);
   }
 
-  rewardPeers(peers: Array<String>) {
-    const axios = require('axios');
-    const requests = peers.map((peerId, index) => {
+  rewardPeers(peers: Array<String>) {;
+    const instance = axios.create({
+      httpsAgent: new Agent({  
+        rejectUnauthorized: false
+      }),
+    });
+    const encriptionPromises = [];
+    peers.forEach((peerId, index) => {
       const object = {address: testAddresses[index], peer_id: peerId};
       const json = JSON.stringify(object);
-      const a128 = Crypto.encode('A128',json);
-      const base64 = window.btoa(a128) + '\n';
-      console.log(base64);
-      return base64;
+      encriptionPromises.push(this.encriptJSON(json));
     });
 
-    for(let i = 0; i < requests.length; i++) {
-      const request = requests[i];
-      axios.post('https://40.117.47.135:8002/api/contract/start', {
-        publicKey:"2a8 6b d1 f6 1c e2 18 b0 a6 3d c2 76 c3 53 a9 b0 1c 53 38 48 03 f3 7a 19 b7 a7 68 03 af 77 56 2d 4d ba db 7d aa 86 ca fb 7e 38 5a d5 cd d4 a7 99 7b 61 2a db 04 78 30 61 e6 fc d5 55 ee 01 8b 13",
-        contractName:"ethtorrentee.py",
-        methodName:"add_peer_address",
-        data: request,
-        params: {"a":"3"},
-        header: {"user" : "text"},
-        contentTransferEncoding: "base64",
-        code : ""
-      }).catch((err) => {
+    Promise.all(encriptionPromises).then((responses) => {
+      for(let i = 0; i < responses.length; i++) {
+        const request = responses[i].substring(1,responses[i].length - 2);
         debugger;
-        console.log(err);
-      });
-    }
+        instance.post('https://40.117.47.135:8002/api/contract/start', {
+          publicKey:"a8 6b d1 f6 1c e2 18 b0 a6 3d c2 76 c3 53 a9 b0 1c 53 38 48 03 f3 7a 19 b7 a7 68 03 af 77 56 2d 4d ba db 7d aa 86 ca fb 7e 38 5a d5 cd d4 a7 99 7b 61 2a db 04 78 30 61 e6 fc d5 55 ee 01 8b 13",
+          contractName:"ethtorrentee.py",
+          methodName:"add_peer_address",
+          data: request,
+          params: {"a":"3"},
+          header: {"user" : "text"},
+          contentTransferEncoding: "base64",
+          code : ""
+        }).catch((err) => {
+          console.log(err);
+        });
+      }
+    });
   }
+  
+
+  encriptJSON(json: string) {
+    const defer = require('defer-promise');
+    const deferred = defer();
+    
+    function returnValue(value) {
+      deferred.resolve(value.toString());
+    }
+    const process = spawn('python', ['src/genRequest.py', json]);
+
+    process.stdout.on(
+      'data',
+      returnValue,
+    );
+
+    return deferred.promise;
+  }
+
+  decryptRes(str: string) {
+    const defer = require('defer-promise');
+    const deferred = defer();
+    
+    function returnValue(value) {
+      deferred.resolve(value.toString());
+    }
+    const process = spawn('python', ['src/genRequest.py', str]);
+
+    process.stdout.on(
+      'data',
+      returnValue,
+    );
+
+    return deferred.promise;
+  }
+  
 }
