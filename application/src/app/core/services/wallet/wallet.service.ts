@@ -17,17 +17,17 @@ export class WalletService {
 
   create() {
     if (this.balance === null) {
-      const clientId = "c76d2361577b6d10fc12"
+      const clientId =  "12b0990373054f099794";
       const redirectUrl = "http%3A%2F%2Flocalhost%3A4200%2F%23%2Frecieved-wallet"
       const url = `https://app.squarelink.com/authorize?client_id=${clientId}&scope=[user,wallets:admin]&redirect_uri=${redirectUrl}&response_type=token`;
       window.open(url);
       return {};
     } else {
-      return {
-        token: this.token,
-        address: this.address,
-        balance: this.balance,
-      }
+        return {
+          token: this.token,
+          address: this.address,
+          balance: this.balance,
+        }
     }
   }
 
@@ -68,4 +68,22 @@ export class WalletService {
       return res.data.ETH.balance;
     });
   }
+
+  withdrawal() {
+    const clientId =  "12b0990373054f099794";
+    const to = "0x91A9709D96cf79420F12E01AC23dD779eAd97bFF";
+    const amount = this.balance;
+    const url = `https://app.squarelink.com/tx?client_id=${clientId}&to=${to}&amount=${amount}`;
+    return axios.get(url);
+  }
+
+  fund(fund) {
+    if (fund < this.balance) {
+      const clientId =  "12b0990373054f099794";
+      const to = "0x91A9709D96cf79420F12E01AC23dD779eAd97bFF";
+      const amount = this.balance;
+      const url = `https://app.squarelink.com/tx?client_id=${clientId}&to=${to}&amount=${fund}`;
+      return axios.get(url);
+    } 
+  }  
 }

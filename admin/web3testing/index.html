@@ -37,12 +37,12 @@
     <script>
 
 
-      if (window.ethereum) {
+  if (window.ethereum) {
     window.web3 = new Web3(ethereum);
-    try {
+  try {
       // Request account access if needed
       ethereum.enable();
-    } catch (error) {
+  } catch (error) {
       // User denied account access...
     }
   } else if (window.web3) {
@@ -59,7 +59,7 @@
       </script>
       <script>
 
-        const eth = new Eth(web3.currentProvider)
+      const eth = new Eth(web3.currentProvider)
       var ABI = [
 	{
 		"constant": true,
