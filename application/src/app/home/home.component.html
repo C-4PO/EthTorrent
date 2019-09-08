@@ -14,7 +14,7 @@
             <div *ngIf="balance != null" class="balance">
               <span>{{balance}}</span> <sup class="currency">ETH</sup>
             </div>
-            <div *ngIf="address" class="address">
+            <div *ngIf="address" class="address" (click)="copyAddress()">
               {{address}}
             </div>
         </div>

@@ -85,10 +85,12 @@
     "node": ">=10.9.0"
   },
   "dependencies": {
+    "@types/defer-promise": "^1.0.0",
     "@types/webtorrent": "^0.107.0",
     "angular-svg-icon": "^8.0.0",
     "axios": "^0.19.0",
     "crypo": "^0.1.4",
+    "defer-promise": "^2.0.1",
     "ethers": "^4.0.36",
     "webtorrent": "^0.107.9"
   }
