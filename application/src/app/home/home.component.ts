@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   downloads: Array<Torrent> = [];
   uploads:  Array<Torrent> = [];
   magnet: FormControl = new FormControl('');
+  fund: FormControl = new FormControl('');
   balance: number;
   constructor(private torrentService: TorrentService, private walletService: WalletService) {
     const address = localStorage.getItem('address');
@@ -65,4 +66,16 @@ export class HomeComponent implements OnInit {
       this.balance = balance;
     }
   }
+
+  withdrawal() {
+    this.walletService.withdrawal();
+  }
+
+  sendFund() {
+    const fund = this.fund.value;
+    if (fund && this.walletService.balance >= fund) {
+      this.walletService.fund(fund);
+    }
+  }
+
 }
