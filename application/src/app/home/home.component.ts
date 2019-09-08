@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
     } else {
       window.addEventListener("message", (message) => {
         if (message.data.isWallet) {
+          debugger;
           this.address = message.data.address;
           this.balance = message.data.balance;
         }
